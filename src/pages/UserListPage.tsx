@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import UserList from '../components/UserList';
 import { getUsers } from '../api/users';
 import './UserListPage.css';
-import { Button } from 'primereact/button';
 import MenuItem from '../components/Menu';
 
 interface User {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './UserListPage.css';
 import { createCampaign, getAllCampaigns } from '../api/campaigns';
 import { getAllVideos } from '../api/videos';  // Assuming you have an API for fetching videos
-import CampaignsList from '../components/CAmpaignsList';
+import CampaignsList from '../components/CampaignsList';
 import { Dropdown } from 'primereact/dropdown';
 import { MultiSelect } from 'primereact/multiselect';
 import { Button } from 'primereact/button';
