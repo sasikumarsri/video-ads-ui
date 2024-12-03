@@ -1,0 +1,46 @@
+/* 
+.video-player-container {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100vh; 
+  background-color: black; 
+  z-index: 9999; 
+  overflow: hidden;
+}
+
+.video-player-container iframe {
+  width: 300%; 
+  height: 100%;
+  border: none; 
+  pointer-events: none;
+  background-color: black; 
+  margin-left: -100%;
+} */
+
+/* Style for the iframe container */
+.video-player-container {
+  position: fixed; /* Keeps the video in full-screen */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full-screen width */
+  height: 100vh; /* Full-screen height */
+  background-color: black; /* Black background for a cinematic feel */
+  z-index: 9999; /* Ensures it is on top of other elements */
+  overflow: hidden; /* Prevents scrollbars */
+}
+
+/* Style for the iframe */
+.video-player-container iframe {
+  width: 300%; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  border: none; /* Removes the default iframe border */
+  pointer-events: none; /* Disables pointer interactions with the iframe */
+  background-color: black; /* Prevents flashes of white before the video loads */
+  position: absolute;
+  margin-left: -100%;
+  left: 0;
+  top: 0;
+  object-fit: cover; /* Ensures video covers the full screen without distortion */
+}
