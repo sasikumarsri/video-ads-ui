@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import UserListPage from '../pages/UserListPage';
 import YouTubePlayerPage from '../pages/YouTubePlayerPage';
@@ -12,6 +12,7 @@ const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/users" element={<UserListPage />} />
         <Route path="/devices" element={<DevicePage />} />
