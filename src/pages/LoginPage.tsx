@@ -35,10 +35,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="login-container">
       <Card className="login-card">
-        <div className="text-center">
-        <img src="../../public/logo.png" width={250} alt="" />
-
-        </div>
+      <img src="../../public/logo.svg" width={250} alt="" />
         <h2 className='mb-3'>login</h2>
         <div className="p-fluid">
           <div className="p-field mb-3">
