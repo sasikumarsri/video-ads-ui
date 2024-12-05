@@ -56,7 +56,7 @@ const YouTubePlayerPage: React.FC = () => {
             ) : (
                 <div style={loadingStyle} className='flex'>
                     <img
-                        src="/logo.png" // You can replace this with your own loading image
+                        src="/logo.svg" // You can replace this with your own loading image
                         alt="Loading..."
                         style={imageStyle}
                     />
