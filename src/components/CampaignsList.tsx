@@ -1,24 +1,43 @@
-
 import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
-const ViewButton = ({ id }: { id: number }) => {
-  const navigate = useNavigate()
-  return (<Button label='' icon='pi pi-eye' onClick={() => navigate('/lines/' + id)}></Button>)
-}
+import { deleteCampaignByDeviceID } from '../api/campaigns';
 
-const CampaignsList: React.FC<any> = ({ campaigns }) => {
+const CampaignsList: React.FC<any> = ({ campaigns, refetch }) => {
+  const navigate = useNavigate();
+
+  const handleDeleteCampaign = async (id: number) => {
+    try {
+      await deleteCampaignByDeviceID(id);
+      console.log(`Campaigns for device ${id} deleted successfully.`);
+      refetch(); // Optionally refresh parent data
+    } catch (error) {
+      console.error(`Failed to delete campaigns for device ${id}`, error);
+    }
+  };
+
+  const ViewButton = ({ id }: { id: number }) => (
+    <>
+      <Button label="" icon="pi pi-eye" onClick={() => navigate(`/lines/${id}`)} />
+      <Button
+        label=""
+        className="ml-2"
+        icon="pi pi-trash"
+        onClick={() => handleDeleteCampaign(id)}
+      />
+    </>
+  );
+
   return (
-
     <DataTable value={campaigns} tableStyle={{ minWidth: '50rem' }}>
-      <Column field="deviceId" header="ID"></Column>
-      <Column field="campaignName" header="Campaign Name"></Column>
-      <Column field="deviceName" header="Device Name"></Column>
-      <Column field="userName.username" header="Name"></Column>
-      <Column field="count" header="# of lines"></Column>
-      <Column header="Action" body={(rowData) => <ViewButton id={rowData.deviceId} />} ></Column>
+      <Column field="deviceId" header="ID" />
+      <Column field="campaignName" header="Campaign Name" />
+      <Column field="deviceName" header="Device Name" />
+      <Column field="userName.username" header="Name" />
+      <Column field="count" header="# of lines" />
+      <Column header="Action" body={(rowData) => <ViewButton id={rowData.deviceId} />} />
     </DataTable>
   );
 };

@@ -35,26 +35,26 @@ const CampaignsListPage: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedVideos, setSelectedVideos] = useState<string[]>([]);
   const [campaignName, setCampaignName] = useState<string>('');  // State for campaign name
+  const fetchData = async () => {
+    try {
+      const campaignsData = await getAllCampaigns();
+      setCampaigns(campaignsData);
 
+      const usersData = await getUsers();
+      setUsers(usersData);
+
+      const videosData = await getAllVideos();
+      setVideos(videosData);
+    } catch (err) {
+      setError('Failed to fetch data. Please try again.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
   // Fetch campaigns, users, and videos on initial load
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const campaignsData = await getAllCampaigns();
-        setCampaigns(campaignsData);
-
-        const usersData = await getUsers();
-        setUsers(usersData);
-
-        const videosData = await getAllVideos();
-        setVideos(videosData);
-      } catch (err) {
-        setError('Failed to fetch data. Please try again.');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    
 
     fetchData();
   }, []);
@@ -155,7 +155,7 @@ const CampaignsListPage: React.FC = () => {
           </div>
 
           {campaigns.length > 0 ? (
-            <CampaignsList campaigns={campaigns} />
+            <CampaignsList campaigns={campaigns} refetch={fetchData} />
           ) : (
             <p>No campaigns found.</p>
           )}

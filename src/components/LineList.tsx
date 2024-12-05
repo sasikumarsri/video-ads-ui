@@ -4,21 +4,22 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { deleteCampaign } from '../api/campaigns';
 
-// Handle click event for delete action
-const handleClick = async (id: number) => {
-  console.log('Deleting item with id:', id);
-  const dele = await deleteCampaign(id)
-  if (dele) {
-    location.reload()
-  }
-}
-
 // Delete button component
-const DeleteButton = ({ id }: { id: number }) => (
-  <Button label='' icon='pi pi-trash' onClick={() => handleClick(id)} />
-);
+const DeleteButton = ({ id, refetchData }: { id: number; refetchData: () => void }) => {
+  const handleClick = async () => {
+    try {
+      console.log('Deleting item with id:', id);
+      await deleteCampaign(id);
+        refetchData(); // Refetch data after deletion
+    } catch (error) {
+      console.error('Failed to delete campaign:', error);
+    }
+  };
 
-const LineList: React.FC<any> = ({ lines }) => {
+  return <Button label="" icon="pi pi-trash" onClick={handleClick} />;
+};
+
+const LineList: React.FC<{ lines: any[]; refetchData: () => void }> = ({ lines, refetchData }) => {
   return (
     <DataTable value={lines} tableStyle={{ minWidth: '50rem' }}>
       <Column field="campaignName" header="Campaign Name"></Column>
@@ -28,7 +29,7 @@ const LineList: React.FC<any> = ({ lines }) => {
       <Column field="video.url" header="Video URL"></Column>
       <Column
         header="Action"
-        body={(rowData) => <DeleteButton id={rowData.id} />} // Pass deviceId or appropriate ID from rowData
+        body={(rowData) => <DeleteButton id={rowData.id} refetchData={refetchData} />}
       />
     </DataTable>
   );

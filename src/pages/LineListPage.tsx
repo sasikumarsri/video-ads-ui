@@ -16,20 +16,24 @@ const LineListPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { id } = useParams();
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await getLinesByCampaignId(id ?? '1');
-        setLines(data);
-      } catch (err) {
-        setError('Failed to fetch lines. Please try again.');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchUsers();
+  // Function to refetch data
+  const refetchData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getLinesByCampaignId(id ?? '1');
+      setLines(data);
+    } catch (err) {
+      setError('Failed to fetch lines. Please try again.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    refetchData(); // Fetch data on mount
   }, []);
 
   if (loading) {
@@ -41,19 +45,17 @@ const LineListPage: React.FC = () => {
   }
 
   return (
-    <>
-      <div className="flex">
-        <MenuItem />
-        <div className="user-list-page page">
-          <h1>Line List</h1>
-          {lines.length > 0 ? (
-            <LineList lines={lines} />
-          ) : (
-            <p>No lines found.</p>
-          )}
-        </div>
+    <div className="flex">
+      <MenuItem />
+      <div className="user-list-page page">
+        <h1>Line List</h1>
+        {lines.length > 0 ? (
+          <LineList lines={lines} refetchData={refetchData} />
+        ) : (
+          <p>No lines found.</p>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

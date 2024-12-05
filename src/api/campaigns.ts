@@ -10,6 +10,11 @@ export const deleteCampaign = async (id: any): Promise<any> => {
   return response.data;
 };
 
+export const deleteCampaignByDeviceID = async (id: any): Promise<any> => {
+  const response = await axiosInstance.delete<any>('video-assignments/device/' + id);
+  return response.data;
+};
+
 export const getLinesByCampaignId = async (id: string): Promise<any> => {
   const response = await axiosInstance.get<any>(`video-assignments/${id}/rows`);
   return response.data;
