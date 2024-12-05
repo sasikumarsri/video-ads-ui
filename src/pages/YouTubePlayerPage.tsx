@@ -54,10 +54,33 @@ const YouTubePlayerPage: React.FC = () => {
                     <YouTubePlayer videoIds={videoIds} />
                 </div>
             ) : (
-                <p>Loading videos...</p> // Optionally show a loading state when no videoIds
+                <div style={loadingStyle} className='flex'>
+                    <img
+                        src="../../public/logo.png" // You can replace this with your own loading image
+                        alt="Loading..."
+                        style={imageStyle}
+                    />
+                    <h3>No Ads Assigned</h3>
+                </div> // Optionally show a loading state when no videoIds
             )}
         </>
     );
+};
+
+
+// Styles for the loading screen and image
+const loadingStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    height: '100vh', // Full viewport height
+    backgroundImage: 'linear-gradient(to top, #dfe9f3 0%, white 100%)',
+    backgroundSize: 'cover',
+};
+
+const imageStyle: React.CSSProperties = {
+    width: '30%', // You can change the size of the loading image
 };
 
 export default YouTubePlayerPage;

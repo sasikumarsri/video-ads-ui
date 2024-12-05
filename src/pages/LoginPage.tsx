@@ -35,7 +35,10 @@ const LoginPage: React.FC = () => {
   return (
     <div className="login-container">
       <Card className="login-card">
-        <img src="https://wishtreetech.com/wp-content/uploads/2023/10/wishtree-blue-logo.svg" alt="" />
+        <div className="text-center">
+        <img src="../../public/logo.png" width={250} alt="" />
+
+        </div>
         <h2 className='mb-3'>login</h2>
         <div className="p-fluid">
           <div className="p-field mb-3">
