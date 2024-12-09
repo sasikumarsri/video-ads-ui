@@ -49,7 +49,7 @@ const DeviceList: React.FC<{ devices: any }> = ({ devices }) => {
       <DataTable value={devices} tableStyle={{ minWidth: '50rem' }}>
         <Column field="id" header="ID"></Column>
         <Column field="device_name" header="Device Name"></Column>
-        <Column field="is_online" header="Device Online Status"></Column>
+        {/* <Column field="is_online" header="Device Online Status"></Column> */}
         <Column field="user.username" header="Username"></Column>
         <Column header="Action" body={editButton}></Column>
       </DataTable>
