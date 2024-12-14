@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: 'http://3.149.246.221:8080/', // Replace with your API URL
+  baseURL: window.sessionStorage.apiUrl || 'http://3.149.246.221:8080/', // Replace with your API URL
   timeout: 10000, // Request timeout in ms
   headers: {
     'Content-Type': 'application/json',
