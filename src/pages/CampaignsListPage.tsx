@@ -41,7 +41,8 @@ const CampaignsListPage: React.FC = () => {
       setCampaigns(campaignsData);
 
       const usersData = await getUsers();
-      setUsers(usersData);
+      const user = usersData.filter((user: { role: string }) => user.role === 'TV');
+      setUsers(user);
 
       const videosData = await getAllVideos();
       setVideos(videosData);
