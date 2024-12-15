@@ -31,7 +31,6 @@ const CampaignsListPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedVideos, setSelectedVideos] = useState<string[]>([]);
@@ -47,7 +46,6 @@ const CampaignsListPage: React.FC = () => {
       const videosData = await getAllVideos();
       setVideos(videosData);
     } catch (err) {
-      setError('Failed to fetch data. Please try again.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -92,7 +90,6 @@ const CampaignsListPage: React.FC = () => {
         summary: 'Error',
         detail: err.response.data.message,
     });
-      setError('Failed to create campaign. Please try again.');
     }
   };
 
