@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import AppRoutes from './routes/AppRoutes';
+import TosterComponent from './components/TosterComponent';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -36,7 +37,15 @@ const App: React.FC = () => {
       window.removeEventListener('unload', handleUnload);
     };
   }, []);
-  return <AppRoutes />;
+  return (
+    <>
+      {/* Toast component */}
+      <TosterComponent />
+
+      {/* Main app routes */}
+      <AppRoutes />
+    </>
+  );
 };
 
 export default App;

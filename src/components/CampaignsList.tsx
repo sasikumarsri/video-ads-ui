@@ -4,6 +4,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 import { deleteCampaignByDeviceID } from '../api/campaigns';
+import ToastService from '../api/tosterService';
 
 const CampaignsList: React.FC<any> = ({ campaigns, refetch }) => {
   const navigate = useNavigate();
@@ -11,6 +12,11 @@ const CampaignsList: React.FC<any> = ({ campaigns, refetch }) => {
   const handleDeleteCampaign = async (id: number) => {
     try {
       await deleteCampaignByDeviceID(id);
+      ToastService.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Campaign Deleted!',
+    });
       console.log(`Campaigns for device ${id} deleted successfully.`);
       refetch(); // Optionally refresh parent data
     } catch (error) {

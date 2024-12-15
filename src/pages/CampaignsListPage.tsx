@@ -9,6 +9,7 @@ import { Button } from 'primereact/button';
 import { getUsers } from '../api/users';
 import { InputText } from 'primereact/inputtext';
 import MenuItem from '../components/Menu';
+import ToastService from '../api/tosterService';
 
 interface Campaign {
   id: string;
@@ -84,8 +85,13 @@ const CampaignsListPage: React.FC = () => {
       setCampaignName('');
       setSelectedUser(null);
       setSelectedVideos([]);
-    } catch (err) {
-      console.error('Failed to create campaign:', err);
+    } catch (err: any) {
+      console.error('Failed to create campaign:', err.response.data.message);
+      ToastService.show({
+        severity: 'error',
+        summary: 'Error',
+        detail: err.response.data.message,
+    });
       setError('Failed to create campaign. Please try again.');
     }
   };
@@ -94,9 +100,9 @@ const CampaignsListPage: React.FC = () => {
     return <div className="loading">Loading campaigns...</div>;
   }
 
-  if (error) {
-    return <div className="error">{error}</div>;
-  }
+  // if (error) {
+  //   return <div className="error">{error}</div>;
+  // }
 
   return (
     <>
